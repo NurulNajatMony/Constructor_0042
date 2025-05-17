@@ -137,3 +137,38 @@ public:
     friend class Petugas;
 };
 
+int main() {
+    // Membuat objek buku
+    Buku buku1("C++ Programming", "Bjarne Stroustrup");
+    Buku buku2("Data Structures", "Mark Allen Weiss");
+
+    // Membuat objek peminjam
+    Peminjaman peminjam1("Alice", 101);
+    Peminjaman peminjam2("Bob", 102);
+
+    // Membuat objek petugas
+    Petugas petugas1("John", 1, "Member");
+
+    // Membuat objek admin
+    Admin admin1("Admin", 0);
+
+    // Admin mengubah level akses petugas
+    admin1.ubahLevelAkses(&petugas1, "Supervisor");
+
+    // Petugas memproses peminjaman
+    petugas1.prosesPinjam(&buku1, &peminjam1);
+    petugas1.prosesPinjam(&buku2, &peminjam1);
+
+    // Admin melihat jumlah pinjaman
+    admin1.lihatJumlahBuku(&peminjam1);
+
+    // Petugas memproses pengembalian
+    petugas1.prosesKembali(&buku1, &peminjam1);
+
+    // Admin melihat status peminjaman buku
+    admin1.lihatBukuSedangDiproses(&buku1);
+    admin1.lihatBukuSedangDiproses(&buku2);
+
+    return 0;
+}
+
