@@ -99,3 +99,41 @@ public:
     friend class Admin;
 };
 
+// Class Admin untuk mengelola petugas dan melihat status peminjaman
+class Admin {
+private:
+    string nama;
+    int id;
+
+public:
+    Admin(string n, int i) : nama(n), id(i) {}
+
+    // Fungsi untuk mengubah level akses petugas
+    void ubahLevelAkses(Petugas* p, string level) {
+        p->levelAkses = level;
+        cout << "Level akses petugas " << p->nama << " telah diubah menjadi " << level << endl;
+    }
+
+    // Fungsi untuk melihat jumlah buku yang dipinjam oleh peminjam
+    void lihatJumlahBuku(Peminjaman* p) {
+        cout << "Jumlah buku yang dipinjam oleh " << p->getNama() << ": " << p->getJumlahBuku() << endl;
+    }
+
+    // Fungsi untuk melihat total pinjaman
+    void lihatTotalPinjaman(Peminjaman* p) {
+        cout << "Total pinjaman oleh " << p->getNama() << ": " << p->getTotalPinjaman() << endl;
+    }
+
+    // Fungsi untuk melihat buku yang sedang diproses
+    void lihatBukuSedangDiproses(Buku* b) {
+        if (b->dipinjam) {
+            cout << "Buku '" << b->judul << "' sedang dipinjam." << endl;
+        } else {
+            cout << "Buku '" << b->judul << "' belum dipinjam." << endl;
+        }
+    }
+
+    // Friend class Petugas agar bisa melihat dan mengubah data petugas
+    friend class Petugas;
+};
+
