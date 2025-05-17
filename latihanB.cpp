@@ -63,3 +63,39 @@ public:
     }
 };
 
+// Class Petugas untuk menangani peminjaman dan pengembalian
+class Petugas {
+private:
+    string nama;
+    int id;
+    string levelAkses;
+
+public:
+    Petugas(string n, int i, string l) : nama(n), id(i), levelAkses(l) {}
+
+    // Fungsi untuk memproses peminjaman buku
+    void prosesPinjam(Buku* b, Peminjaman* p) {
+        if (!b->dipinjam) {
+            b->dipinjam = true;
+            p->tambahBuku(1); // Tambah jumlah buku yang dipinjam
+            cout << "Buku '" << b->judul << "' telah dipinjam oleh " << p->getNama() << endl;
+        } else {
+            cout << "Buku '" << b->judul << "' sudah dipinjam." << endl;
+        }
+    }
+
+    // Fungsi untuk memproses pengembalian buku
+    void prosesKembali(Buku* b, Peminjaman* p) {
+        if (b->dipinjam) {
+            b->dipinjam = false;
+            p->tambahBuku(-1); // Kurangi jumlah buku yang dipinjam
+            cout << "Buku '" << b->judul << "' telah dikembalikan oleh " << p->getNama() << endl;
+        } else {
+            cout << "Buku '" << b->judul << "' belum dipinjam." << endl;
+        }
+    }
+
+    // Friend class Admin agar bisa mengakses data petugas
+    friend class Admin;
+};
+
